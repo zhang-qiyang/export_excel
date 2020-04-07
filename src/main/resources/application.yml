@@ -1,0 +1,24 @@
+server:
+  port: 9001
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://49.233.182.119:3306/test?useSSL=false&useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true
+    url: jdbc:mysql://localhost:3306/tet?useSSL=false&useUnicode=true&characterEncoding=UTF-8&rewriteBatchedStatements=true
+    username: root
+    password: zhangqiyang0
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 10
+      idle-timeout: 180000
+      maximum-pool-size: 300
+      auto-commit: true
+      pool-name: MyHikari
+      max-lifetime: 1800000
+      connection-timeout: 3000000
+      connection-test-query: SELECT 1
+mybatis:
+  check-config-location: true
+  config-location: classpath:/mybatis-config.xml
+  mapper-locations: mapper/*.xml
+  type-aliases-package: com.chrysler.www.export_excel.entity
