@@ -136,7 +136,7 @@ public class ExportExcelImpl implements ExportExcelService{//InitializingBean
     @Override
     @Transactional(rollbackFor = Exception.class)
     public long batchInsert() {
-        //初始化1000000条数据
+        //初始化100多万条数据
         List<User> data = insertUser();
         Long startTime = System.currentTimeMillis();
         String addSql = "insert into tet.user (UID, USER_NAME, PHONE, ADDRESS,EMAIL,AGE) VALUES(?,?,?,?,?,?)";
