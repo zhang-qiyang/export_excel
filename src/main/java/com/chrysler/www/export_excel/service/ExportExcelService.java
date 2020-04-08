@@ -15,10 +15,11 @@ public interface ExportExcelService {
     /**导出用户数据
      * @param user 用户信息
      * @param response 相应
+     * @param excelName
      * @return
      * @throws Exception 异常
      */
-    ResponseEntity<byte[]> exportExcel(List<User> user, HttpServletResponse response) throws Exception;
+    ResponseEntity<byte[]> exportExcel(List<User> user, HttpServletResponse response,String excelName) throws Exception;
 
     long batchInsert();
 

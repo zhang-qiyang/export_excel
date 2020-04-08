@@ -45,13 +45,13 @@ public class ExportExcelImpl implements ExportExcelService{//InitializingBean
      * @return
      */
     @Override
-    public ResponseEntity<byte[]> exportExcel(List<User> user, HttpServletResponse response) throws Exception{
+    public ResponseEntity<byte[]> exportExcel(List<User> user, HttpServletResponse response,String excelName) throws Exception{
         ServletOutputStream out = null;
         try {
             out = response.getOutputStream();
             ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX);
             // 设置EXCEL名称
-            String fileName = new String(("绑定关系").getBytes(), "UTF-8");
+            String fileName = new String((excelName).getBytes(), "UTF-8");
             // 设置SHEET名称
             Sheet sheet = new Sheet(1, 0);
             sheet.setSheetName("sheet1");
@@ -73,8 +73,6 @@ public class ExportExcelImpl implements ExportExcelService{//InitializingBean
             for (int i = 0; i < writeCount; i++) {
                 List<List<String>> dataList = new ArrayList<>();
                 // 此处查询并封装数据即可 currentPage, pageSize这个变量封装好的 不要改动
-//                PageHelper.startPage(i + 1, pageSize);
-//                List<SysSystemVO> sysSystemVOList = this.sysSystemReadMapper.selectSysSystemVOList(sysSystemVO);
                 List<User> list = SubPage.resultPage(user, i + 1, pageSize);
                 if (!CollectionUtils.isEmpty(list)) {
                     list.forEach(u -> {
