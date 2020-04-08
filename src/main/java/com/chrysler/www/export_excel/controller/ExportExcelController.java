@@ -28,11 +28,12 @@ public class ExportExcelController {
     public ResponseEntity<byte[]> exportExcel(HttpServletResponse response) {
         long l = System.currentTimeMillis();
         try {
+            String excelName="自定义excel名称";
             User user = new User();
             long timeMillis = System.currentTimeMillis();
             List<User> users = userDao.queryAll(user);
             System.out.println("查询数据耗时："+(System.currentTimeMillis() - timeMillis));
-            return exportExcelService.exportExcel(users, response);
+            return exportExcelService.exportExcel(users, response,excelName);
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
