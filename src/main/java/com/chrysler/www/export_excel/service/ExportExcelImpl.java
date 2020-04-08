@@ -9,7 +9,6 @@ import com.chrysler.www.export_excel.dao.UserDao;
 import com.chrysler.www.export_excel.entity.User;
 import com.chrysler.www.export_excel.utils.SubPage;
 import com.chrysler.www.export_excel.utils.UUIDUtil;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -34,8 +33,6 @@ import java.util.*;
  */
 @Service
 public class ExportExcelImpl implements ExportExcelService{//InitializingBean
-
-    private static List<User> resultUser=new ArrayList<>();
     @Autowired
     private UserDao userDao;
     @Autowired
@@ -49,7 +46,6 @@ public class ExportExcelImpl implements ExportExcelService{//InitializingBean
      */
     @Override
     public ResponseEntity<byte[]> exportExcel(List<User> user, HttpServletResponse response) throws Exception{
-        resultUser=user;
         ServletOutputStream out = null;
         try {
             out = response.getOutputStream();
