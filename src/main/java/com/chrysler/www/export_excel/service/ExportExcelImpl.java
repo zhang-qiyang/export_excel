@@ -90,6 +90,8 @@ public class ExportExcelImpl implements ExportExcelService{//InitializingBean
             }
             // 下载EXCEL
             response.setHeader("Content-Disposition", "attachment;filename=" + new String((fileName).getBytes("gb2312"), "ISO-8859-1") + ".xlsx");
+            //如果下载文件名乱码，改用此响应头（前端vue框架）
+//            response.setHeader("Content-Disposition", "attachment;filename="+java.net.URLEncoder.encode(fileName+".xlsx","UTF-8"));
             response.setContentType("multipart/form-data");
             response.setCharacterEncoding("utf-8");
             writer.finish();
