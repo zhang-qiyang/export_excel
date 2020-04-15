@@ -3,6 +3,7 @@ package com.chrysler.www.export_excel.controller;
 import com.chrysler.www.export_excel.dao.UserDao;
 import com.chrysler.www.export_excel.entity.User;
 import com.chrysler.www.export_excel.service.ExportExcelService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/export")
+@Slf4j
 public class ExportExcelController {
     @Autowired
     private ExportExcelService exportExcelService;
@@ -28,17 +30,17 @@ public class ExportExcelController {
     public ResponseEntity<byte[]> exportExcel(HttpServletResponse response) {
         long l = System.currentTimeMillis();
         try {
-            String excelName="自定义excel名称";
+            String excelName="下载";
             User user = new User();
             long timeMillis = System.currentTimeMillis();
             List<User> users = userDao.queryAll(user);
-            System.out.println("查询数据耗时："+(System.currentTimeMillis() - timeMillis));
+            log.info("查询数据耗时:{}ms",System.currentTimeMillis() - timeMillis);
             return exportExcelService.exportExcel(users, response,excelName);
         } catch (Exception e) {
             e.printStackTrace();
         }finally {
             long o = System.currentTimeMillis();
-            System.out.println("下载总耗时："+(o-l));
+            log.info("下载总耗时:{}ms",o-l);
         }
         return null;
     }
